@@ -1,0 +1,120 @@
+// schema.prisma
+datasource db {
+  provider = "sqlite" // change to "postgresql" or "mysql" if needed
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  password  String
+  role      String    @default("USER")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Relations
+  applications Application[]
+  assets       Asset[]
+  memberships  WorkspaceMembership[]
+}
+
+model Company {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  jobs Job[]
+}
+
+model Job {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  status      String        @default("OPEN")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  companyId   Int
+  company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applications Application[]
+}
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  jobId  Int
+  userId Int
+  job    Job   @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Asset {
+  id        Int       @id @default(autoincrement())
+  name      String
+  type      String
+  createdAt DateTime  @default(now())
+
+  userId Int
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  calendar CalendarEntry[]
+}
+
+model CalendarEntry {
+  id        Int      @id @default(autoincrement())
+  title     String
+  date      DateTime
+  assetId   Int
+  asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
+}
+
+model Workspace {
+  id          Int                   @id @default(autoincrement())
+  name        String
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  memberships WorkspaceMembership[]
+  accounts    PublishingAccount[]
+  analytics   AnalyticSegment[]
+}
+
+model WorkspaceMembership {
+  id          Int       @id @default(autoincrement())
+  role        String    @default("MEMBER")
+  createdAt   DateTime  @default(now())
+
+  userId      Int
+  workspaceId Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model PublishingAccount {
+  id          Int       @id @default(autoincrement())
+  platform    String
+  identifier  String
+  createdAt   DateTime  @default(now())
+
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model AnalyticSegment {
+  id          Int       @id @default(autoincrement())
+  name        String
+  data        Json
+  createdAt   DateTime  @default(now())
+
+  workspaceId Int
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}

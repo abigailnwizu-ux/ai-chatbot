@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+<div class="result-container">
+  <div class="result-card">
+    <% if (question && question.trim() !== '') { %>
+      <div class="question-block">
+        <div class="label">You asked:</div>
+        <div class="question"><%= question %></div>
+      </div>
+    <% } %>
+    
+    <div class="answer-block">
+      <div class="label">AI Response:</div>
+      <% if (answer && answer.trim() !== '') { %>
+        <% if (answer.startsWith('Error:')) { %>
+          <div class="answer error" style="border-left-color: #ef4444; background: #fee2e2;">
+            <%= answer %>
+          </div>
+        <% } else { %>
+          <div class="answer">
+            <%= answer %>
+          </div>
+        <% } %>
+      <% } else { %>
+        <div class="answer" style="font-style: italic; color: #6b7280;">
+          Ask me something using the search bar above
+        </div>
+      <% } %>
+    </div>
+    
+    <div class="actions">
+      <a href="/ai" class="btn btn-primary">Ask Another Question</a>
+    </div>
+  </div>
+</div>
+</div>
+<%- include("partials/footer") %>

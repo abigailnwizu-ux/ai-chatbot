@@ -1,0 +1,18 @@
+<%- include("partials/header", { title: "Sign Up" }) %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+<main class="page auth">
+  <div class="card" style="max-width: 400px; margin: 3rem auto;">
+    <h1 class="page-title">Create an Account</h1>
+    <form method="post" action="/register" class="form">
+      <label>Name <input type="text" name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Password <input type="password" name="password" required></label>
+      <button type="submit" class="btn primary">Register</button>
+    </form>
+    <p style="margin-top: 1rem;">Already have an account? <a href="/login">Login</a></p>
+  </div>
+</main>
+</div>
+
+<%- include("partials/footer") %>

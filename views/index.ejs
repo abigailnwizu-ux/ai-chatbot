@@ -1,0 +1,150 @@
+<div class="app-wrapper">
+<%- include("partials/header", { title: "Welcome" }) %></div>
+<div class="app-body">
+<%- include("partials/sidebar", { title: "Welcome" }) %></div>
+<main class="page home">
+  <!-- Hero -->
+  <section class="hero card" style="display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;">
+    <div>
+      <h1>Welcome  &#x1F44B </h1>
+      <h2 class="page-title" style="font-size:2.2rem;line-height:1.2;">
+        Plan. Create. Grow. <br>
+        <span class="accent">Onyx AI</span> for Social Media Teams
+      </h2>
+      <p class="page-subtitle" style="max-width:52ch;">
+        Turn ideas into eye-catching posts, plan campaigns, track goals, and analyze results — all in one sleek workspace powered by AI.
+      </p>
+
+      <div class="actions" style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem;">
+        <h1>
+          Welcome <%= user ? user.name:"Guest" %> &#x1F44B To Onyx AI
+        </h1>
+      
+          <a class="btn primary" href="/dashboard">Go to Dashboard</a>
+          <a class="btn ghost" href="/campaign">Create Campaign</a>
+        
+          <a class="btn primary" href="/register">Get Started Free</a>
+          <a class="btn ghost" href="/login">I already have an account</a>
+      
+      </div>
+
+      <div class="chips" style="margin-top:1rem;">
+        <span class="chip">AI Content</span>
+        <span class="chip">Campaign Planner</span>
+        <span class="chip">Analytics</span>
+        <span class="chip">Team Roles</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- leave image slot open; replace the src when you add your asset -->
+      <img src="/images/abbie4.svg" alt="Dashboard preview" style="width:100%;height:auto;border-radius:16px;">
+    </div>
+  </section>
+
+  <!-- Trust / counters (optional) -->
+  <section class="grid-3 stats-cards" style="margin-top:1.5rem;">
+    <div class="card stat">
+      <h3>Teams onboard</h3>
+      <p class="number">120+</p>
+    </div>
+    <div class="card stat">
+      <h3>Posts generated</h3>
+      <p class="number">18k</p>
+    </div>
+    <div class="card stat">
+      <h3>Avg. time saved</h3>
+      <p class="number">7h/week</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" style="margin-top:2rem;">
+    <h2 class="section-title">Everything you need</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>AI Content Generator</h3>
+        <p class="muted">Ask, refine, and publish in minutes. Nigerian tone and trends supported.</p>
+      </div>
+      <div class="card">
+        <h3>Campaign Planner</h3>
+        <p class="muted">Map multi-channel campaigns, budgets, and timelines.</p>
+      </div>
+      <div class="card">
+        <h3>Goals & KPIs</h3>
+        <p class="muted">Track followers, leads, and conversions with clear deadlines.</p>
+      </div>
+      <div class="card">
+        <h3>Asset Library</h3>
+        <p class="muted">Store creatives, captions, brand voices, and reuse instantly.</p>
+      </div>
+      <div class="card">
+        <h3>Analytics</h3>
+        <p class="muted">See what’s working across platforms with clean visuals.</p>
+      </div>
+      <div class="card">
+        <h3>Team Roles</h3>
+        <p class="muted">Admin, Manager, Contributor — permissions built-in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works" style="margin-top:2rem;">
+    <h2 class="section-title">How it works</h2>
+    <div class="grid-3">
+      <div class="card">
+        <strong>1) Sign up</strong>
+        <p class="muted">Create your workspace and invite your team.</p>
+      </div>
+      <div class="card">
+        <strong>2) Set goals</strong>
+        <p class="muted">Define KPIs and timelines that matter.</p>
+      </div>
+      <div class="card">
+        <strong>3) Generate & launch</strong>
+        <p class="muted">Use AI to create content and plan campaigns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / slider (optional; works if Swiper CDN is in header partial) -->
+  <section class="featured" style="margin-top:2rem;">
+    <h2 class="section-title">Loved by modern teams</h2>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide card">
+          <p>“We ship campaigns 2× faster.”</p>
+          <span class="muted">Head of Marketing — Lagos</span>
+        </div>
+        <div class="swiper-slide card">
+          <p>“The AI captions slap — engagement up 35%.”</p>
+          <span class="muted">Creator — Abuja</span>
+        </div>
+        <div class="swiper-slide card">
+          <p>“Finally one place for content, goals, and analytics.”</p>
+          <span class="muted">Agency Lead — PH</span>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta card" style="margin-top:2rem;text-align:center;padding:2rem;">
+    <h2 class="section-title">Ready to build your next hit campaign?</h2>
+    <p class="muted">Start free. No credit card required.</p>
+    <div style="margin-top:1rem;">
+     
+        <a class="btn primary" href="/dashboard">Open Dashboard</a>
+        <a class="btn primary" href="/campaign">Create Campaign</a>
+        <a class="btn primary" href="/register">Create your account</a>
+        <a class="btn ghost" href="/login">Log in</a>
+    
+    </div>
+  </section>
+</main>
+
+<%- include("partials/footer") %>

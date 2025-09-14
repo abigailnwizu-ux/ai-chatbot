@@ -1,0 +1,24 @@
+<%- include("partials/header", { title: "Strategy" }) %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+  <main class="main-content">
+    <section class="page">
+      <h1 class="page-title">📑 Strategies</h1>
+      <form method="post" action="/strategy" class="form card">
+        <label>Strategy Title <input name="title" required></label>
+        <label>Description <textarea name="description"></textarea></label>
+        <button class="btn primary">Save Strategy</button>
+      </form>
+
+      <ul class="list">
+        <% (strategies || []).forEach(s => { %>
+          <li class="card">
+            <strong><%= s.title %></strong>
+            <p class="muted"><%= s.description %></p>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  </main>
+</div>
+<%- include("partials/footer") %>

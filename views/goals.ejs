@@ -1,0 +1,29 @@
+<%- include("partials/header", { title: "Goals" }) %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+
+  <main class="main-content">
+    <section class="page">
+      <h1 class="page-title">🎯 Goals</h1>
+      <form method="post" action="/goals" class="form card">
+        <label>Goal Title <input name="title" required></label>
+        <label>Target Metric <input name="metric" placeholder="Followers, Leads, Sales"></label>
+        <label>Deadline <input type="date" name="deadline"></label>
+        <button class="btn primary">Save Goal</button>
+      </form>
+
+      <ul class="list">
+        <%if (typeof goals !== 'undefined' && goals.length > 0) { %>
+        <% (goals || []).forEach(function(g) { %>
+          <li class="card">
+            <strong><%= g.title %></strong>
+            <div class="muted"><%= g.metric %> • due <%= g.deadline %></div>
+            <a href="/goals/<%= g.id %>/edit" class="btn ghost">Edit</a>
+          </li>
+        <% }) %>
+        <% } %>
+      </ul>
+    </section>
+  </main>
+</div>
+<%- include("partials/footer") %>

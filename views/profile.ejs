@@ -1,0 +1,24 @@
+<%- include("partials/header", {title: "Your Profile"})%>
+<div class="app-container">
+    <%-include("partials/sidebar")%>
+</div>
+
+<main class="main-content">
+    <section class="page-profile">
+        <h1 class="page-title">Profile</h1>
+        <p class="page-subtitle">Here's your current account information.</p>
+        <div class="card profile-card">
+            <div class="profile-info">
+                <p><strong>Name:</strong> <%= user?.name || "Not set"%></p>
+                <p><strong>Email:</strong><%= user?.email || "Not set" %></p>
+                <p><strong>Role:</strong><%= user?.role || "User" %></p>
+            </div>
+            <div class="profile-actions">
+                <a href="/settings" class="btn primary">Edit Profile</a>
+                <a href="/logout" class="btn danger">Logout</a>
+            </div>
+        </div>
+    </section>
+</main>
+</div>
+<%- include("partials/footer")%>

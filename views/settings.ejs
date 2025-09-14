@@ -1,0 +1,31 @@
+<%- include("partials/header", { title: "Settings" }) %>
+
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+
+  <main class="main-content">
+    <section class="page settings">
+      <h1 class="page-title">Settings</h1>
+      <p class="page-subtitle">Manage your profile and preferences.</p>
+
+      <div class="card">
+        <h2>Profile</h2>
+        <form method="post" action="/settings/profile" class="form">
+          <label>Name <input type="text" name="name" value="<%= user?.name || '' %>" required></label>
+          <label>Email <input type="email" name="email" value="<%= user?.email || '' %>" required></label>
+       <button type="submit" class="btn primary">Update Profile</button>
+        </form>
+      </div>
+
+      <div class="card" style="margin-top: 2rem;">
+        <h2>Password</h2>
+        <form method="post" action="/settings/password" class="form">
+          <label>New Password <input type="password" name="password" required></label>
+          <button type="submit" class="btn primary">Change Password</button>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,28 @@
+<%- include("partials/header", { title: "Campaigns" }) %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+  <main class="main-content">
+    <section class="page">
+      <h1 class="page-title">📢 Campaign</h1>
+      <form method="post" action="/campaign" class="form card">
+        <label>Campaign Name <input name="name" required></label>
+        <label>Budget <input type="number" name="budget"></label>
+        <button class="btn primary">Create Campaign</button>
+      </form>
+
+      <ul class="list">
+        <%if (typeof campaigns !== 'undefined' && campaigns.length > 0) { %>
+           <% campaigns.forEach(function(c) { %>
+          <li class="card">
+            <strong><%= c.name %></strong>
+            <div class="muted">Budget: <%= c.budget %></div>
+          </li>
+        <% }) %>
+          <% } else{%>
+          <li>No Campaigns Found</li>
+        <%}%>
+      </ul>
+    </section>
+  </main>
+</div>
+<%- include("partials/footer") %>

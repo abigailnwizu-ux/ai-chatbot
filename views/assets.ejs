@@ -1,0 +1,25 @@
+<%- include("partials/header", { title: "Assets" }) %>
+<div class="app-container">
+  <%- include("partials/sidebar") %>
+  <main class="main-content">
+    <section class="page">
+      <h1 class="page-title">📂 Assets</h1>
+      <form method="post" action="/assets" enctype="multipart/form-data" class="form card">
+        <label>Upload Asset <input type="file" name="file"></label>
+        <button class="btn primary">Upload</button>
+      </form>
+
+      <ul class="list">
+        <%if (typeof assets !== 'undefined' && assets.length > 0) { %>
+        <% (assets || []).forEach(a => { %>
+          <li class="card">
+            <strong><%= a.filename %></strong>
+            <a href="<%= a.url %>" target="_blank" class="btn ghost">View</a>
+          </li>
+        <% }) %>
+        <%}%>
+      </ul>
+    </section>
+  </main>
+</div>
+<%- include("partials/footer") %>

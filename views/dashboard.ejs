@@ -1,0 +1,60 @@
+<%- include("partials/header", { title: "Dashboard" }) %>
+
+<div class="app-container">
+  <!-- Sidebar -->
+  <%- include("partials/sidebar") %>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="page dashboard">
+      <!-- Greeting -->
+      <h1 class="page-title">
+        Welcome back, 👋
+      </h1>
+      <p class="page-subtitle">Here’s your quick overview.</p>
+
+      <!-- === Stats Cards === -->
+      <div class="grid-3 stats-cards reveal">
+        <div class="card stat">
+          <h3>Campaigns</h3>
+          <p class="number"><%= stats?.campaigns || 0 %></p>
+        </div>
+        <div class="card stat">
+          <h3>Goals</h3>
+          <p class="number"><%= stats?.goals || 0 %></p>
+        </div>
+        <div class="card stat">
+          <h3>Assets</h3>
+          <p class="number"><%= stats?.assets || 0 %></p>
+        </div>
+      </div>
+
+      <!-- === Featured Campaigns (Swiper) === -->
+      <section class="featured reveal">
+        <h2>Featured Campaigns</h2>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide card">
+              <img src="/images/abbie1.svg" alt="Campaign">
+              <h3>AI Growth Campaign</h3>
+            </div>
+            <div class="swiper-slide card ">
+              <img src="/images/abbie2.svg" alt="Campaign">
+              <h3>Community Boost</h3>
+            </div>
+            <div class="swiper-slide card">
+              <img src="/images/abbie3.svg" alt="Campaign">
+              <h3>AI Empowerment</h3>
+            </div>
+          </div>
+          <!-- Swiper controls -->
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+
+<%- include("partials/footer") %>
