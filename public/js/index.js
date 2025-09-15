@@ -1,17 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("✅ index.js loaded");
-
-  // === DOM Elements ===
   const menuBtn = document.getElementById("menuBtn");
   const sidebar = document.getElementById("sidebar");
   const backdrop = document.getElementById("backdrop");
   const searchToggle = document.getElementById("searchToggle");
   const searchBar = document.querySelector(".search-bar");
-  const searchForm = document.querySelector(".search-bar form");
+  const searchForm = document.querySelector(".search-bar");
   const darkBtn = document.getElementById("darkBtn");
   const body = document.body;
-
-  // === Sidebar Functions ===
+  
   function openSidebar() {
     sidebar?.classList.add("open", "active");
     backdrop?.classList.add("active");
@@ -43,11 +40,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // === Search Bar Toggle ===
-  function toggleSearchBar(ev) {
-    ev.preventDefault();
-    searchBar?.classList.toggle("expanded");
+  function handleSearchClick(ev) {
     const input = searchBar?.querySelector("input[type='search'], input[name='q']");
-    if (searchBar?.classList.contains("expanded")) input?.focus();
+    
+    // If search bar is not expanded, expand it and focus input
+    if (!searchBar?.classList.contains("expanded")) {
+      ev.preventDefault();
+      searchBar?.classList.add("expanded");
+      // Small delay for mobile to prevent viewport jump
+      setTimeout(() => input?.focus(), 100);
+      return;
+    }
+    
+    // If expanded but no input value, prevent submission
+    if (!input?.value.trim()) {
+      ev.preventDefault();
+      // Remove alert, just refocus instead
+      input?.focus();
+      return;
+    }
+    
+    // If we have input value, let the form submit naturally
+    console.log("🔍 Submitting search:", input.value);
   }
 
   // === Dark Mode Toggle ===
@@ -80,12 +94,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === Search Form Validation ===
+  // === Search Form Validation (backup validation) ===
   function validateSearchForm(e) {
-    const input = searchForm?.querySelector("input[name='q']");
+    const input = e.target?.querySelector("input[name='q']");
     if (!input?.value.trim()) {
       e.preventDefault();
-      alert("Please enter a search term.");
+      // Remove alert, just focus the input
+      input?.focus();
+    } else {
+      console.log("✅ Form validation passed, submitting to /ai/ask");
+    }
+  }
+
+  // === Keyboard Support for Search ===
+  function handleSearchKeydown(e) {
+    if (e.key === "Enter") {
+      const input = e.target;
+      if (input.value.trim()) {
+        console.log("⌨️ Enter pressed, submitting search");
+        // Let the form submit naturally
+      }
     }
   }
 
@@ -93,9 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
   menuBtn?.addEventListener("click", toggleSidebar);
   backdrop?.addEventListener("click", closeSidebar);
   document.addEventListener("keydown", (e) => e.key === "Escape" && closeSidebar());
-  searchToggle?.addEventListener("click", toggleSearchBar);
-  darkBtn?.addEventListener("click", toggleDarkMode);
+  
+  // Updated search event listeners
+  searchToggle?.addEventListener("click", handleSearchClick);
   searchForm?.addEventListener("submit", validateSearchForm);
+  
+  // Add keyboard support
+  const searchInput = searchBar?.querySelector("input[name='q']");
+  searchInput?.addEventListener("keydown", handleSearchKeydown);
+  
+  darkBtn?.addEventListener("click", toggleDarkMode);
   window.addEventListener("scroll", revealOnScroll);
 
   // === Initial Calls ===
