@@ -455,9 +455,6 @@ padding: 1rem;
 .search-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  align-self: center;
-  justify-self: center;
   background: white;
   border-radius: 9px;
   padding: 5px 10px;
@@ -475,7 +472,6 @@ padding: 1rem;
   border: none;
   outline: none;
   background:transparent;
-  align-items: center;
   font-size:.95rem;
   color:var(--text);
   transition: width 0.3s ease, opacity 0.3s ease;
