@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const { authenticateToken } = require("../middleware/auth");
 
 // Get all assets in a campaign
-router.get("/campaign/:campaignId", authenticateToken, async (req, res) => {
+router.get("/campaign/:campaignId", async (req, res) => {
   try {
     const assets = await prisma.asset.findMany({
       where: { campaignId: req.params.campaignId },
@@ -18,7 +17,7 @@ router.get("/campaign/:campaignId", authenticateToken, async (req, res) => {
 });
 
 // Create asset
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { campaignId, type, title, content, status } = req.body;
     const asset = await prisma.asset.create({
@@ -31,7 +30,7 @@ router.post("/", authenticateToken, async (req, res) => {
 });
 
 // Update asset
-router.put("/:id", authenticateToken, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { type, title, content, status } = req.body;
     const asset = await prisma.asset.update({
@@ -45,7 +44,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
 });
 
 // Delete asset
-router.delete("/:id", authenticateToken, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await prisma.asset.delete({ where: { id: req.params.id } });
     res.json({ message: "Asset deleted" });

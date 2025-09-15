@@ -183,53 +183,35 @@ router.get("/logout", (req, res) => {
   req.session.destroy(() => res.redirect("/"));
 });
 
-router.get("/dashboard", authenticateToken, (req, res) => {
+router.get("/dashboard", async (req, res) => {
   res.render("dashboard", { title: "Dashboard", stats:{}
   });
 });
 
-router.get("/goals", authenticateToken, (req, res) => {
+router.get("/goals", async (req, res) => {
   res.render("goals", { title: "Goals"});
 });
 
-router.post("/goals", authenticateToken, (req, res) => {
-  // TODO: save goal
-  res.redirect("/goals");
-});
 
 // Changed from /strategy → /stra
-router.get("/stra", authenticateToken, (req, res) => {
+router.get("/stra", async (req, res) => {
   res.render("stra", { title: "Strategy"});
 });
 
-router.post("/stra", authenticateToken, (req, res) => {
-  // TODO: save strategy
-  res.redirect("/stra");
-});
-
-router.get("/campaign", authenticateToken, (req, res) => {
+router.get("/campaign", async (req, res) => {
   res.render("campaign", { title: "Campaigns"});
 });
 
-router.post("/campaign", authenticateToken, (req, res) => {
-  // TODO: save campaign
-  res.redirect("/campaign",{title:"Campaign"});
-});
 
-router.get("/assets", authenticateToken, (req, res) => {
+router.get("/assets", async (req, res) => {
   res.render("assets", { title: "Assets"});
 });
 
-router.post("/assets", authenticateToken, (req, res) => {
-  // TODO: save asset
-  res.render("/assets",{title:"Assets"});
-});
-
-router.get("/analytics",authenticateToken,(req,res) => {
+router.get("/analytics",async (req,res) => {
   res.render("analytics",{title:"Analytics"});
 });
 
-router.get("/calendar", authenticateToken, (req, res) => {
+router.get("/calendar", async (req, res) => {
   res.render("calendar", { title: "Calendar"});
 });
 

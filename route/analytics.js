@@ -8,7 +8,7 @@ const { authenticateToken } = require("../middleware/auth");
 router.get("/", async(req,res) =>{
   res.render("analytics");
 });
-router.get("/:workspaceId", authenticateToken, async (req, res) => {
+router.get("/:workspaceId", async (req, res) => {
   try {
     const events = await prisma.analyticsEvent.findMany({
       where: { workspaceId: req.params.workspaceId }
@@ -20,7 +20,7 @@ router.get("/:workspaceId", authenticateToken, async (req, res) => {
 });
 
 // Add analytics event
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { workspaceId, accountId, assetId, type, value } = req.body;
     const event = await prisma.analyticsEvent.create({

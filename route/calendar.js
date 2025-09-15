@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const { authenticateToken } = require("../middleware/auth");
 
 // Get all calendar entries in a campaign
-router.get("/campaign/:campaignId", authenticateToken, async (req, res) => {
+router.get("/campaign/:campaignId",async (req, res) => {
   try {
     const entries = await prisma.calendarEntry.findMany({
       where: { campaignId: req.params.campaignId },
@@ -18,7 +18,7 @@ router.get("/campaign/:campaignId", authenticateToken, async (req, res) => {
 });
 
 // Create calendar entry
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { campaignId, assetId, scheduledAt, status } = req.body;
     const entry = await prisma.calendarEntry.create({

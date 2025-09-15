@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const { authenticateToken } = require("../middleware/auth");
 
 // Get all campaigns in a workspace
-router.get("/:workspaceId", authenticateToken, async (req, res) => {
+router.get("/:workspaceId",async (req, res) => {
   try {
     const campaigns = await prisma.campaign.findMany({
       where: { workspaceId: parseInt(req.params.workspaceId) },
@@ -20,7 +20,7 @@ router.get("/:workspaceId", authenticateToken, async (req, res) => {
 });
 
 // Create campaign
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/",async (req, res) => {
   try {
     const { workspaceId, name, description, startDate, endDate } = req.body;
     const campaign = await prisma.campaign.create({
@@ -33,7 +33,7 @@ router.post("/", authenticateToken, async (req, res) => {
 });
 
 // Update campaign
-router.put("/:id", authenticateToken, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { name, description, startDate, endDate } = req.body;
     const campaign = await prisma.campaign.update({
@@ -47,7 +47,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
 });
 
 // Delete campaign
-router.delete("/:id", authenticateToken, async (req, res) => {
+router.delete("/:id",async (req, res) => {
   try {
     await prisma.campaign.delete({ where: { id: req.params.id } });
     res.json({ message: "Campaign deleted" });

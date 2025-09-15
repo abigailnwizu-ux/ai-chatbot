@@ -4,7 +4,40 @@
   <main class="main-content">
     <section class="page">
       <h1 class="page-title">📅 Calendar</h1>
-      <div class="card">[Calendar Integration Placeholder]</div>
+      <div class="hhh"><!-- Calendar grid -->
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let week = 0; week < 5; week++) { %>
+              <tr>
+                <% for (let day = 0; day < 7; day++) { %>
+                  <td class="calendar-day">
+                    <div class="date-number"><%= week * 7 + day + 1 %></div>
+                    <!-- Example event -->
+                    <% if (week === 1 && day === 2) { %>
+                      <div class="event"</div>
+                    <% } %>
+                  </td>
+                <% } %>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">[Current Date: <input type="datetime" placeholder="dd/mm/yy">]</div>
+      <div class="hhh">
+      <button class="btn primary" href="/goals">Done</button>
+      </div>
     </section>
   </main>
 </div>
