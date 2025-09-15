@@ -75,9 +75,6 @@ model CalendarEntry {
   date      DateTime
   assetId   Int
   asset     Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  userId    Int      
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
 }
 
