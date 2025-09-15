@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("✅ index.js loaded");
+
+  // === DOM Elements ===
   const menuBtn = document.getElementById("menuBtn");
   const sidebar = document.getElementById("sidebar");
   const backdrop = document.getElementById("backdrop");
@@ -8,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchForm = document.querySelector(".search-bar");
   const darkBtn = document.getElementById("darkBtn");
   const body = document.body;
-  
+
+  // === Sidebar Functions ===
   function openSidebar() {
     sidebar?.classList.add("open", "active");
     backdrop?.classList.add("active");
@@ -47,15 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!searchBar?.classList.contains("expanded")) {
       ev.preventDefault();
       searchBar?.classList.add("expanded");
-      // Small delay for mobile to prevent viewport jump
-      setTimeout(() => input?.focus(), 100);
+      input?.focus();
       return;
     }
     
-    // If expanded but no input value, prevent submission
+    // If expanded but no input value, prevent submission and show alert
     if (!input?.value.trim()) {
       ev.preventDefault();
-      // Remove alert, just refocus instead
+      alert("Please enter a search term.");
       input?.focus();
       return;
     }
@@ -99,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = e.target?.querySelector("input[name='q']");
     if (!input?.value.trim()) {
       e.preventDefault();
-      // Remove alert, just focus the input
+      alert("Please enter a search term.");
       input?.focus();
     } else {
       console.log("✅ Form validation passed, submitting to /ai/ask");

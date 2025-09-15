@@ -123,7 +123,7 @@ body.dark .menu-btn {
 .sidebar.active{
     transform: translateX(0);
   }
-@media (max-width: 768px){
+@media (max-width: 480pxpx){
   .page.auth.signup .form .grid-2 {
     grid-template-columns: 1fr;
   }
@@ -273,7 +273,7 @@ margin: 0;
 }
 
 /* 📱 Mobile responsiveness */
-@media (min-width: 768px)and (max-width: 800px) {
+@media (min-width: 480pxpx)and (max-width: 800px) {
   .cta-buttons {
     flex-direction: column;
     align-items: stretch;
