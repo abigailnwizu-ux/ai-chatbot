@@ -499,6 +499,20 @@ padding: 1rem;
   color:var(--text);
   transition: width 0.3s ease, opacity 0.3s ease;
   font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+ -webkit-text-fill-color: black !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    -webkit-opacity: 1 !important;
+    opacity: 1 !important;
+    
+    /* Remove any conflicting properties */
+    text-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    clip: auto !important;
+    clip-path: none !important;
+    mask: none !important;
+    -webkit-mask: none !important;
 }
 .search-bar input:focus {
   outline: 2px solid var(--primary);
