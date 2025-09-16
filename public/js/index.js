@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ index.js loaded");
+  console.log("✅ Clean index.js loaded");
 
   // === DOM Elements ===
   const menuBtn = document.getElementById("menuBtn");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const backdrop = document.getElementById("backdrop");
   const searchToggle = document.getElementById("searchToggle");
   const searchBar = document.querySelector(".search-bar");
-  const searchForm = document.querySelector(".search-bar");
+  const searchInput = document.querySelector(".search-bar input[name='q']");
   const darkBtn = document.getElementById("darkBtn");
   const body = document.body;
 
@@ -42,21 +42,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Search Bar Toggle ===
-  function handleSearchClick(ev) {
-    const input = searchBar?.querySelector("input[type='search'], input[name='q']");
+  // === Search Functions - Mobile Optimized ===
+  function handleSearchSubmit(e) {
+    const input = searchInput;
     
-
+    // Only validate on submit - don't interfere with typing
+    if (!input?.value?.trim()) {
+      e.preventDefault();
+      console.log("❌ Empty search prevented");
+      
+      // Focus input for mobile
+      if (input) {
+        input.focus();
+        // On mobile, show keyboard
+        if ('ontouchstart' in window) {
+          input.click();
+        }
+      }
+      return false;
+    }
     
-    // If we have input value, let the form submit naturally
-    console.log("🔍 Submitting search:", input.value);
+    console.log("✅ Submitting search:", input.value);
+    // Let form submit naturally
+    return true;
   }
 
   // === Dark Mode Toggle ===
   function toggleDarkMode() {
     body.classList.toggle("dark");
     const isDark = body.classList.contains("dark");
-    darkBtn?.classList.replace(isDark ? "fa-moon" : "fa-sun", isDark ? "fa-sun" : "fa-moon");
+    const icon = darkBtn?.querySelector("i");
+    
+    if (icon) {
+      icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    }
+    
     console.log(isDark ? "🌙 Dark mode ON" : "☀️ Dark mode OFF");
   }
 
@@ -82,46 +102,66 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === Search Form Validation (backup validation) ===
-  function validateSearchForm(e) {
-    const input = e.target?.querySelector("input[name='q']");
-    if (!input?.value.trim()) {
-      e.preventDefault();
-      alert("Please enter a search term.");
-      input?.focus();
-    } else {
-      console.log("✅ Form validation passed, submitting to /ai/ask");
+  // === Mobile Input Fix ===
+  function initMobileInputFix() {
+    if (!searchInput) return;
+    
+    // Mobile-specific touch handling
+    if ('ontouchstart' in window) {
+      console.log("📱 Mobile device detected - applying input fixes");
+      
+      // Ensure input is focusable on mobile
+      searchInput.addEventListener('touchstart', function(e) {
+        // Don't preventDefault - let normal touch work
+        console.log("👆 Touch on search input");
+      }, { passive: true });
+      
+      // Handle input focus properly on mobile
+      searchInput.addEventListener('focus', function() {
+        console.log("✅ Search input focused");
+        // Scroll input into view on mobile if needed
+        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      
+      // Debug typing
+      searchInput.addEventListener('input', function() {
+        console.log("✅ User typing:", this.value);
+      });
     }
-  }
-
-  // === Keyboard Support for Search ===
-  function handleSearchKeydown(e) {
-    if (e.key === "Enter") {
-      const input = e.target;
-      if (input.value.trim()) {
-        console.log("⌨️ Enter pressed, submitting search");
-        // Let the form submit naturally
-      }
-    }
+    
+    // Ensure input is always interactive
+    searchInput.style.pointerEvents = 'auto';
+    searchInput.style.userSelect = 'text';
+    searchInput.style.webkitUserSelect = 'text';
+    searchInput.style.touchAction = 'manipulation';
   }
 
   // === Event Listeners ===
+  
+  // Sidebar
   menuBtn?.addEventListener("click", toggleSidebar);
   backdrop?.addEventListener("click", closeSidebar);
   document.addEventListener("keydown", (e) => e.key === "Escape" && closeSidebar());
   
-  // Updated search event listeners
-  searchToggle?.addEventListener("click", handleSearchClick);
-  searchForm?.addEventListener("submit", validateSearchForm);
+  // Search - SIMPLIFIED (no complex event handling)
+  searchBar?.addEventListener("submit", handleSearchSubmit);
   
-  // Add keyboard support
-  const searchInput = searchBar?.querySelector("input[name='q']");
-  searchInput?.addEventListener("keydown", handleSearchKeydown);
-  
+  // Dark mode
   darkBtn?.addEventListener("click", toggleDarkMode);
+  
+  // Scroll reveal
   window.addEventListener("scroll", revealOnScroll);
 
-  // === Initial Calls ===
+  // === Initialization ===
   revealOnScroll();
   initSwiper();
+  initMobileInputFix();
+  
+  // === Debug Info ===
+  console.log("🔍 Search elements check:");
+  console.log("- Search bar:", !!searchBar);
+  console.log("- Search input:", !!searchInput);
+  console.log("- Search toggle:", !!searchToggle);
+  console.log("- Input type:", searchInput?.type);
+  console.log("- Input name:", searchInput?.name);
 });
