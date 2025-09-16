@@ -199,6 +199,7 @@ body.dark .menu-btn {
     font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     border: none;
     opacity: 0;
+    color: black !important;
     pointer-events: none;
     font-size: 16px !important;
     border: 1px solid black !important;
@@ -489,6 +490,7 @@ padding: 1rem;
 .search-bar input {
   padding: 0.5rem 1rem;
   flex: 1;
+  color: black !important;
   border: none;
   font-size: 16px !important;
   outline: none;
