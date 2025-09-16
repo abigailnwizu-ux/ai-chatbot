@@ -204,6 +204,10 @@ body.dark .menu-btn {
     gap: 20px;
     grid-column: span 6;
   }
+  .search-bar{
+    max-width: 200px;
+    margin: 0;
+  }
   .card{
     padding: 32px 24px;
   }
@@ -315,7 +319,7 @@ margin: 0;
   background: #f3f4f6;
 }
 
-/* 📱 Mobile responsiveness */
+/* Mobile responsiveness */
 @media (min-width: 768px) {
   .cta-buttons {
     flex-direction: column;
@@ -454,7 +458,6 @@ padding: 1rem;
 }
 .search-bar {
   display: flex;
-  align-items: center;
   background: white;
   border-radius: 9px;
   padding: 5px 10px;
