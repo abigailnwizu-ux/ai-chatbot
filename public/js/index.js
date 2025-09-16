@@ -46,21 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleSearchClick(ev) {
     const input = searchBar?.querySelector("input[type='search'], input[name='q']");
     
-    // If search bar is not expanded, expand it and focus input
-    if (!searchBar?.classList.contains("expanded")) {
-      ev.preventDefault();
-      searchBar?.classList.add("expanded");
-      input?.focus();
-      return;
-    }
-    
-    // If expanded but no input value, prevent submission and show alert
-    if (!input?.value.trim()) {
-      ev.preventDefault();
-      alert("Please enter a search term.");
-      input?.focus();
-      return;
-    }
+
     
     // If we have input value, let the form submit naturally
     console.log("🔍 Submitting search:", input.value);

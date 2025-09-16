@@ -205,8 +205,8 @@ body.dark .menu-btn {
     grid-column: span 6;
   }
   .search-bar{
-    max-width: 200px;
     margin: 0;
+    display: flex;
   }
   .card{
     padding: 32px 24px;
@@ -463,7 +463,6 @@ padding: 1rem;
   padding: 5px 10px;
   flex:1;
   gap: 0.4rem;
-  max-width: 200px;
   border: 1px solid #ddd;
   overflow: hidden;
   margin: 0 1rem;
