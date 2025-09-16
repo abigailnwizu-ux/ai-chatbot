@@ -189,6 +189,11 @@ body.dark .menu-btn {
     border: 1px solid #ddd;
     background: white;
     flex: 1;
+    font-size: 16px !important;
+    border-radius: 8px;
+    pointer-events: auto !important;
+    -webkit-user-select:text !important;
+    -webkit-touch-callout: default !important;
   }
   .search-bar input{
     font-family: Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -196,12 +201,16 @@ body.dark .menu-btn {
     opacity: 0;
     pointer-events: none;
     font-size: 16px !important;
+    border: 1px solid black !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
   .search-bar.search-bar.expanded input{
     width: 140px;
     padding: 35rem .5rem;
     opacity: 1;
     pointer-events: auto;
+    
   }
   .search-bar form .btn{
     display: none;
@@ -211,10 +220,11 @@ body.dark .menu-btn {
     gap: 20px;
     grid-column: span 6;
   }
-  .search-bar{
-    margin: 0;
-    display: flex;
-    flex:1;
+  .featured{
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-column: span 6;
+    height: auto;
   }
   .card{
     padding: 32px 24px;
@@ -473,6 +483,7 @@ padding: 1rem;
   border: 1px solid #ddd;
   overflow: hidden;
   margin: 0 1rem;
+  border-radius: 8px;
 }
 
 .search-bar input {
